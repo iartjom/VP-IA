@@ -1,0 +1,30 @@
+{
+  "name": "vp-ia",
+  "version": "1.0.0",
+  "description": "Veebiprogrammerimise tundi veeb",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://iartjom@github.com/iartjom/VP-IA.git"
+  },
+  "keywords": [
+    "Node.js",
+    "veeb",
+    "TLU",
+    "DTI",
+    "kontrollitöö",
+    "üliõpilane"
+  ],
+  "author": "Ilja Artjomenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iartjom/VP-IA/issues"
+  },
+  "homepage": "https://github.com/iartjom/VP-IA#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
