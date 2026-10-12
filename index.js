@@ -1,5 +1,5 @@
 const express = require('express');
-//const fs = require('fs').promises;
+const fs = require('fs').promises;
 //moodul URL-i lahtiharutamiseks, et saaks POSt osad ka katte
 const bodyparser = require('body-parser');
 //moodul andmebaasiga suhtlemiseks, promises osaga async programmerimise jaoks
@@ -59,12 +59,16 @@ app.post('/regvisit', async (req, res)=>{
 
 });
 
+//Eesti movie paths
+const eestifilmRouter = require('./routes/eestifilmRoutes');
+app.use('/eestifilm', eestifilmRouter);
+
 app.get('/eestifilm', (req, res)=>{
 	console.log('Andmebaasiserver on: ' + process.env.DB_HOST);
 	res.render('eestifilm');
 });
 	
-app.get('/eestifilm/inimesed', async (req,res)=>{
+/* app.get('/eestifilm/inimesed', async (req,res)=>{
 	//console.log('Andmebaasiserver on: ' + process.env.DB_HOST);
 	let conn;
 	try {
@@ -88,7 +92,7 @@ app.get('/eestifilm/inimesed', async (req,res)=>{
 			await conn.end();
 		}
 	}
-});
+}); */
 
 
 app.get('/eestifilm/inimesed', (req, res)=>{
@@ -130,5 +134,6 @@ app.post('/eestifilm/inimesed_add', async (req, res)=>{
 		res.render('eestifilmiinimesed_add');
 	}
 });
+
 	
 app.listen(5102);
