@@ -18,7 +18,7 @@ const regTextRef = 'public/txt/visit.txt';
 app.set('view engine', 'ejs');
 //määran ühe päris kataloogi virtuaalses serveris kättesaadavaks
 app.use(express.static('public'));
-app.use(bodyparser.urlencoded({extended:false}));
+app.use(bodyparser.urlencoded({extended: true}));
 
 //loon andmebaasiuhensude
 //marsruudid
@@ -42,7 +42,7 @@ app.get('/vanasona', async (req, res)=>{
 	}
 });
 
-app.get('/regvisit', async(req, res)=>{
+app.get('/regvisit', (req, res)=>{
 	res.render('regvisit'); 
 });
 
@@ -68,33 +68,6 @@ app.get('/eestifilm', (req, res)=>{
 	res.render('eestifilm');
 });
 	
-/* app.get('/eestifilm/inimesed', async (req,res)=>{
-	//console.log('Andmebaasiserver on: ' + process.env.DB_HOST);
-	let conn;
-	try {
-		conn = await mysql.createConnection({
-			host: process.env.DB_HOST,
-			user: process.env.DB_USER,
-			password: process.env.DB_PASS,
-			database: 'if26_ilja_artjomenko_ta'
-		});
-		const sqlReq = 'SELECT * FROM person ORDER by last_name';
-		const [sqlRes] = await conn.execute(sqlReq);
-		console.log(sqlRes);
-		res.render('eestifilminimesed', {personList: sqlRes});
-	}
-	catch (err){
-		console.log('Viga andmebaasist lugemisel: ' + err);
-		res.render('eestifilmiinimesed', {personList: []});
-	}
-	finally {
-		if(conn){
-			await conn.end();
-		}
-	}
-}); */
-
-
 app.get('/eestifilm/inimesed', (req, res)=>{
 	res.render('eestifilmiinimesed_add');
 
@@ -135,5 +108,9 @@ app.post('/eestifilm/inimesed_add', async (req, res)=>{
 	}
 });
 
+
+//galeriipiltide uleslaadimine
+const galleryPhotoUploadRouter = require('./routes/galleryPhotoUploadRoutes');
+app.use('/galleryPhotoUpload', galleryPhotoUploadRouter);
 	
 app.listen(5102);
