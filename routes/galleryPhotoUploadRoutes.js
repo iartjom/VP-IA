@@ -10,6 +10,6 @@ const{
 
 router.route('/').get(galleryPhotoUpload);
 
-router.route('/').post(galleryPhotoUploadPost);
+router.route('/').post(upload.single('photoInput'), galleryPhotoUploadPost);
 
 module.exports = router;

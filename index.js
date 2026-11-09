@@ -59,6 +59,14 @@ app.post('/regvisit', async (req, res)=>{
 
 });
 
+app.get('/home', (req, res)=>{
+	res.render('home');
+})
+
+app.get('/logout', (req, res)=>{
+	res.redirect('/');
+})
+
 //Eesti movie paths
 const eestifilmRouter = require('./routes/eestifilmRoutes');
 app.use('/eestifilm', eestifilmRouter);
@@ -112,5 +120,16 @@ app.post('/eestifilm/inimesed_add', async (req, res)=>{
 //galeriipiltide uleslaadimine
 const galleryPhotoUploadRouter = require('./routes/galleryPhotoUploadRoutes');
 app.use('/galleryPhotoUpload', galleryPhotoUploadRouter);
-	
+
+const galleryRouter = require('./routes/galleryRoutes');
+app.use('/gallery', galleryRouter);
+
+//kasutajakonto loomise marsruut
+const signupRouter = require('./routes/signupRoutes');
+app.use('/signup', signupRouter);
+
+//Sisselogimise marsruut
+const signinRouter = require('./routes/signinRoutes');
+app.use('/signin', signinRouter);
+
 app.listen(5102);
