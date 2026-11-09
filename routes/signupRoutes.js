@@ -4,7 +4,7 @@ const router = express.Router();
 //kontrollerid
 const{
 	signupPage,
-	signupPagePost} = require('../controllers/signupController');
+	signupPagePost} = require('../controllers/signupControllers');
 
 router.route('/').get(signupPage);
 
