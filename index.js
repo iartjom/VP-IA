@@ -20,17 +20,19 @@ const app = express();
 const textRef = 'public/txt/vanasonad.txt';
 const regTextRef = 'public/txt/visit.txt';
 
-/*app.use(session({
-	secret: process.env.SES_SECRET,
-	saveUninitialized: false,
-	resave: false
-})); */
 const sessionStore = new MySQLStore({
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
 	password: process.env.DB_PASS,
 	database: process.env.DB_NAME
 });
+
+app.use(session({
+	secret: process.env.SES_SECRET,
+	store: sessionStore,
+	saveUninitialized: false,
+	resave: false
+}));
 
 //määrame veebilehtedele mallide renderdamise motoori
 app.set('view engine', 'ejs');
@@ -76,10 +78,6 @@ app.post('/regvisit', async (req, res)=>{
 	};
 
 });
-
-app.get('/home', (req, res)=>{
-	res.render('home');
-})
 
 app.get('/logout', (req, res)=>{
 	res.redirect('/');

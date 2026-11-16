@@ -22,7 +22,7 @@ const signinPagePost = async (req, res) => {
 	//kontrollime, kas kأµik on olemas
 	if(!email || !req.body.passwordInput){
 		notice = 'Andmeid on puudu!';
-		return res.render('signup', {notice: notice});
+		return res.render('signin', {notice: notice});
 	}
 	
 	try {
@@ -36,7 +36,7 @@ const signinPagePost = async (req, res) => {
 		const [users] = await conn.execute(sqlReq, [email]);
 		if (users.length === 0){
 			notice = 'Sisestatud kasutajatunnus ja/vأµi parool oli vale!';
-			return res.render('signup', {notice: notice});
+			return res.render('signin', {notice: notice});
 		}
 		
 		//kui on olemas, kas parool klapib
@@ -48,13 +48,13 @@ const signinPagePost = async (req, res) => {
 			return res.redirect('/home');
 		} else {
 			notice = 'Sisestatud kasutajatunnus ja/vأµi parool oli vale!';
-			return res.render('/signin', {notice: notice});
+			return res.render('signin', {notice: notice});
 		}
 	
 	}
 	catch (err) {
 		console.log('Viga: ' + err);
-		res.render('signup', {notice: 'Sisselogimine ei µnnestunud!'});
+		res.render('signin', {notice: 'Sisselogimine ei µnnestunud!'});
 	}
 	finally {
 		if(conn){

@@ -18,11 +18,11 @@ const galleryPage = async (req, res) => {
 		const [photos] = await conn.execute(sqlReq, [privacy]);
 		let galleryData = [];
 		for (let i = 0; i < photos.length; i ++){
-			let altTtext = "Galeriipilt";
+			let altText = "Galeriipilt";
 			if(photos[i].alttext != ""){
 				altText = photos[i].alttext;
 			}
-			galleryData.push({src: photos[i].filename, alt: altText});
+			galleryData.push({src: photos[i].filename, alt: altText, id:photos[i].id});
 		}
 		res.render('gallery', {galleryData: galleryData, imagehref: process.env.GALLERY_THUMBNAIL});
 	}

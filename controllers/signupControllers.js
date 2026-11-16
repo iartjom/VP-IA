@@ -85,7 +85,7 @@ const signupPagePost = async (req, res) => {
 		res.render('signup', {notice: notice});
 	}
 	catch (err) {
-		console.log('Viga: ' + err);
+		console.log('Viga: ' + err.message);
 		res.render('signup', {notice: 'Ootan andmeid!'});
 	}
 	finally {
