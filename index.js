@@ -9,7 +9,7 @@ const mysql = require('mysql2/promise');
 require('dotenv').config();
 
 const session = require('express-session');
-const MySQLStore = require('express-mysql-session');
+const MySQLStore = require('express-mysql-session')(session);
 
 const checkLogin = require('./src/checkLogin');
 
@@ -20,11 +20,17 @@ const app = express();
 const textRef = 'public/txt/vanasonad.txt';
 const regTextRef = 'public/txt/visit.txt';
 
-app.use(session({
+/*app.use(session({
 	secret: process.env.SES_SECRET,
 	saveUninitialized: false,
 	resave: false
-}))
+})); */
+const sessionStore = new MySQLStore({
+	host: process.env.DB_HOST,
+	user: process.env.DB_USER,
+	password: process.env.DB_PASS,
+	database: process.env.DB_NAME
+});
 
 //määrame veebilehtedele mallide renderdamise motoori
 app.set('view engine', 'ejs');

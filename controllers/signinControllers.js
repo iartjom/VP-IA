@@ -48,13 +48,13 @@ const signinPagePost = async (req, res) => {
 			return res.redirect('/home');
 		} else {
 			notice = 'Sisestatud kasutajatunnus ja/vأµi parool oli vale!';
-			return res.render('signup', {notice: notice});
+			return res.render('/signin', {notice: notice});
 		}
 	
 	}
 	catch (err) {
 		console.log('Viga: ' + err);
-		res.render('signup', {notice: 'Sisselogimine ei أµnnestunud!'});
+		res.render('signup', {notice: 'Sisselogimine ei µnnestunud!'});
 	}
 	finally {
 		if(conn){

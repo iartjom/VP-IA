@@ -2,7 +2,8 @@
 <html lang="et">
 <head>
 	<meta charset="utf-8">
-	<title>Andrus Rinde, veebiprogrammeerimine</title>
+	<title>Ilja Artjomenko, veebiprogrammeerimine</title>
+	<link rel="stylesheet" href="/style/gallery.css">
 </head>
 <body>
 	<img src="../pic/veebiprogrammeerimine_2026_TA.png" alt="">
@@ -13,7 +14,7 @@
 	</ul>
 	<hr>
 	<% galleryData.forEach(function(image){ %>
-      <img src="<%=imagehref%><%=image.src%>" alt="<%=image.alt%>">
+      <img src="<%=imagehref%><%=image.src%>" alt="<%=image.alt%>" class="thumbs">
     <% }); %>
 </body>
 </html>
