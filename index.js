@@ -8,11 +8,23 @@ const mysql = require('mysql2/promise');
 //moodul .env faili lugemiseks, keskonnamuutujate parsimiseks
 require('dotenv').config();
 
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session');
+
+const checkLogin = require('./src/checkLogin');
+
 const dateET = require('./src/dateTimeET');
+
 const app = express();
 
 const textRef = 'public/txt/vanasonad.txt';
 const regTextRef = 'public/txt/visit.txt';
+
+app.use(session({
+	secret: process.env.SES_SECRET,
+	saveUninitialized: false,
+	resave: false
+}))
 
 //määrame veebilehtedele mallide renderdamise motoori
 app.set('view engine', 'ejs');
@@ -76,6 +88,11 @@ app.get('/eestifilm', (req, res)=>{
 	res.render('eestifilm');
 });
 	
+app.get('/home', checkLogin.isLogin, (req, res)=>{
+	res.render('home');
+
+});	
+	
 app.get('/eestifilm/inimesed', (req, res)=>{
 	res.render('eestifilmiinimesed_add');
 
@@ -99,7 +116,7 @@ app.post('/eestifilm/inimesed_add', async (req, res)=>{
 			host: process.env.DB_HOST,
 			user: process.env.DB_USER,
 			password: process.env.DB_PASS,
-			database: 'if26_ilja_artjomenko_ta'
+			database: process.env.DB_NAME,
 		});
 		let sqlReq = 'INSERT INTO person (first_name, last_name, born, deceasedf0 VALUES (?,?,?,?)';
 		await conn.execute(sqlReq, [

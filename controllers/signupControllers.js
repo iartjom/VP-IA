@@ -61,7 +61,7 @@ const signupPagePost = async (req, res) => {
 			host: process.env.DB_HOST,
 			user: process.env.DB_USER,
 			password: process.env.DB_PASS,
-			database: process.env.DB_NAME
+			database: process.env.DB_NAME,
 		});
 		let sqlReq = 'SELECT id FROM users WHERE email = ?';
 		const [users] = await conn.execute(sqlReq, [email]);
@@ -139,7 +139,7 @@ const galleryPhotoUploadPost = async (req, res) => {
 			host: process.env.DB_HOST,
 			user: process.env.DB_USER,
 			password: process.env.DB_PASS,
-			database: process.env.DB_NAME
+			database: process.env.DB_NAME,
 		});
 		const [result] = await conn.execute(sqlReq, [fileName, req.file.originalname, req.body.altInput, req.body.privacyInput, userId]);
 		console.log('Salvestatii kirje id: ' + result.insertId);//teinekord kasulik teada
